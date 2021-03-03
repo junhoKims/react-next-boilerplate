@@ -2,12 +2,15 @@ import { useState, useEffect } from 'react'
 import { GetStaticProps } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Button from '@material-ui/core/Button'
 import Layout, { siteTitle } from 'components/Layout'
 import Date from 'components/date'
 import { getSortedPostsData } from 'apis/posts'
 import utilStyles from 'styles/utils.module.css'
 
 const Home = ({ allPostsData, isLoading }) => {
+  const router = useRouter()
   const [loading, setLoading] = useState(isLoading)
 
   useEffect(() => {
@@ -29,15 +32,18 @@ const Home = ({ allPostsData, isLoading }) => {
           <ul className={utilStyles.list}>
             {allPostsData.map(({ id, date, title }) => (
               <li className={utilStyles.listItem} key={id}>
-                <Link href={`/posts/${id}`}>
-                  <a>{title}</a>
-                </Link>
-                <br />
-                {id}
-                <br />
+                <div>{title}</div>
                 <small className={utilStyles.lightText}>
                   <Date dateString={date} />
                 </small>
+                <br />
+                <Button
+                  variant='contained'
+                  color='primary'
+                  onClick={() => router.push(`/posts/${id}`)}
+                >
+                  Hello World
+                </Button>
               </li>
             ))}
           </ul>
