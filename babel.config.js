@@ -9,6 +9,15 @@ module.exports = {
   presets: ['next/babel'],
   plugins: [
     [
+      'babel-plugin-import',
+      {
+        libraryName: 'lodash',
+        libraryDirectory: '',
+        camel2DashComponentName: false,
+      },
+      'lodash',
+    ],
+    [
       'module-resolver',
       {
         alias: modules.reduce((prev, cur) => {
